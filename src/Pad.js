@@ -17,6 +17,14 @@ class Pad {
     parentElement.appendChild(this.element);
   }
 
+  get padWidth() {
+    return this.width;
+  }
+
+  get padRight() {
+    return this.right;
+  }
+
   moveRight() {
     // console.log(
     //   "moving right",
