@@ -1,10 +1,19 @@
 class Bomb {
   constructor(parentElement) {
     this.parent = parentElement;
-    this.colors = ["red", "pink", "green", "blue"];
+    this.colors = [
+      "red",
+      "pink",
+      "green",
+      "blue",
+      "black",
+      "brown",
+      "crimson",
+      "Coral",
+    ];
     this.width = 20;
     this.height = 20;
-    this.speed = Math.ceil(Math.random() * 10);
+    this.speed = Math.ceil(Math.random() * 15);
     this.left = Math.floor(Math.random() * parentElement.offsetWidth);
     this.top = 0;
     this.bomb = document.createElement("div");
