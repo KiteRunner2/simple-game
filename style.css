@@ -1,0 +1,12 @@
+.canvas {
+  width: 80%;
+  height: 50vh;
+  border: 1px solid black;
+  margin: auto;
+  position: relative;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+}
