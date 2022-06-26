@@ -24,20 +24,7 @@ export class Pad {
     parentElement.appendChild(this.pad);
   }
 
-  get padWidth() {
-    return this.width;
-  }
-
-  get padRight() {
-    return this.right;
-  }
-
-  get top() {
-    // console.log("mypad.top", this.pad.getClientRects());
-    return this.pad.getClientRects()[0].top;
-  }
-
-  get coordinates() {
+  public get coordinates() {
     return {
       left: this.pad.getClientRects()[0].left,
       right: this.pad.getClientRects()[0].right,
@@ -46,12 +33,7 @@ export class Pad {
     };
   }
 
-  moveRight() {
-    // console.log(
-    //   "moving right",
-    //   this.pad.getBoundingClientRect().right -
-    //     this.parentpad.getBoundingClientRect().right
-    // );
+  public moveRight() {
     if (
       this.pad.getBoundingClientRect().right -
         this.parentElement.getBoundingClientRect().right >
@@ -60,18 +42,9 @@ export class Pad {
       return;
     this.pad.style.right = this.right - this.speed + "px";
     this.right = this.right - this.speed;
-    // console.log(this.parentpad.getBoundingClientRect().top);
-    // console.log(this.parentpad.getBoundingClientRect().left);
-    // console.log(this.parentpad.getBoundingClientRect().right);
-    // console.log(this.parentpad.getBoundingClientRect().bottom);
   }
 
-  moveLeft() {
-    // console.log(
-    //   "moving left",
-    //   this.pad.getBoundingClientRect().left -
-    //     this.parentpad.getBoundingClientRect().left
-    // );
+  public moveLeft() {
     if (
       this.pad.getBoundingClientRect().left -
         this.parentElement.getBoundingClientRect().left <
@@ -82,12 +55,12 @@ export class Pad {
     this.right = this.right + this.speed;
   }
 
-  increaseSpeed() {
+  public increaseSpeed() {
     this.speed += 5;
     if (this.speed > 25) this.speed = 25;
   }
 
-  decreaseSpeed() {
+  public decreaseSpeed() {
     if (this.speed - 5 <= 0) {
       this.speed = 1;
     } else {
@@ -95,7 +68,7 @@ export class Pad {
     }
   }
 
-  get currentSpeed() {
+  public get currentSpeed() {
     return this.speed.toString();
   }
 }
