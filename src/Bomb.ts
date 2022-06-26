@@ -43,11 +43,11 @@ export class Bomb {
     parentElement.appendChild(this.bomb);
   }
 
-  getInitialSpeed(maxSpeed: number) {
+  private getInitialSpeed(maxSpeed: number) {
     return Math.ceil(Math.random() * maxSpeed);
   }
 
-  getBombColor() {
+  private getBombColor() {
     return this.colors[Math.floor(Math.random() * this.colors.length)];
   }
 
@@ -60,7 +60,7 @@ export class Bomb {
     this.clearAllIntervalHandles();
   }
 
-  get coordinates() {
+  public get coordinates() {
     return {
       left: this.bomb.getClientRects()[0].left,
       right: this.bomb.getClientRects()[0].right,
@@ -69,7 +69,7 @@ export class Bomb {
     };
   }
 
-  autoDestruction() {
+  private autoDestruction() {
     this.destructionIntervalHandle = setInterval(() => {
       if (this.isDropping) {
         const shouldExplode = Math.floor(Math.random() * 100) === 0;
@@ -91,6 +91,8 @@ export class Bomb {
       this.top += this.speed;
     }, 500);
     this.intervalHandlesList.push(this.droppingIntervalHandle);
+    this.autoDestruction();
+    this.hit();
   }
 
   isPadHit() {
@@ -104,7 +106,7 @@ export class Bomb {
     return false;
   }
 
-  hit() {
+  private hit() {
     this.hittingIntervalHandle = setInterval(() => {
       if (this.isPadHit()) {
         this.removeFromDom();
