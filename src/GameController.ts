@@ -1,14 +1,17 @@
 import { Bomber } from "./Bomber";
 import { Pad } from "./Pad";
 
-export class Control {
+class GameController {
   canvas: HTMLElement;
   pad: Pad;
   bomber: Bomber;
   constructor() {
     this.canvas = document.getElementById("canvas")!;
-    this.pad = new Pad(this.canvas);
-    this.bomber = new Bomber(this.pad, this.canvas);
+    this.pad = this.createPad();
+    this.bomber = this.createBomber();
+    console.log("canvas", this.canvas);
+    console.log("pad", this.pad);
+    console.log("bomber", this.bomber);
   }
 
   startGame() {
@@ -27,4 +30,14 @@ export class Control {
   movePadRight() {
     this.pad.moveRight();
   }
+
+  createBomber() {
+    return new Bomber(this.pad, this.canvas);
+  }
+
+  createPad() {
+    return new Pad(this.canvas);
+  }
 }
+
+export const gameController = new GameController();
