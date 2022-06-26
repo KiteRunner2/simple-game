@@ -15,8 +15,6 @@ export class Bomber {
     const newBomb = new Bomb(this.canvas, this.pad);
     this.releasedBombCount += 1;
     newBomb.startDropping();
-    newBomb.autoDestruction();
-    newBomb.hit();
   }
 
   startDroppingBombs() {
