@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "build": "tsc --noEmit && esbuild --bundle src/index.ts --outfile=compiled/script.js --minify"
+    "ts-check": "tsc --noEmit",
+    "build": "esbuild --bundle src/index.ts --outfile=compiled/script.js --minify",
+    "deploy": "tsc --noEmit && esbuild --bundle src/index.ts --outfile=compiled/script.js --minify"
   },
   "dependencies": {
     "esbuild": "^0.14.47",
