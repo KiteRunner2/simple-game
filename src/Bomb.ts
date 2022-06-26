@@ -4,18 +4,26 @@ export class Bomb {
   bomb: HTMLElement;
   pad: Pad;
   colors: string[];
-  width: number;
-  height: number;
   speed: number;
   top: number;
   left: number;
   isDropping: boolean;
-  destruction: number | undefined;
-  dropping: number | undefined;
-  hitting: number | undefined;
+  destructionIntervalHandle: number | undefined;
+  droppingIntervalHandle: number | undefined;
+  hittingIntervalHandle: number | undefined;
+  maxBombSpeed: number;
+  intervalHandlesList: number[];
+
   constructor(parentElement: HTMLElement, pad: Pad) {
     this.parent = parentElement;
+    this.intervalHandlesList = [];
     this.pad = pad;
+    this.maxBombSpeed = 15;
+    this.isDropping = false;
+    this.destructionIntervalHandle = undefined;
+    this.droppingIntervalHandle = undefined;
+    this.hittingIntervalHandle = undefined;
+    this.top = 5;
     this.colors = [
       "red",
       "pink",
@@ -26,32 +34,30 @@ export class Bomb {
       "crimson",
       "Coral",
     ];
-    this.width = 20;
-    this.height = 20;
-    this.speed = Math.ceil(Math.random() * 15);
-    this.left = Math.floor(Math.random() * parentElement.offsetWidth);
-    this.top = 0;
+    this.speed = this.getInitialSpeed(15);
+    this.left = this.getInitialPosition();
     this.bomb = document.createElement("div");
-    this.bomb.style.width = this.width + "px";
-    this.bomb.style.height = this.height + "px";
-    this.bomb.style.backgroundColor =
-      this.colors[Math.floor(Math.random() * this.colors.length)];
-    this.bomb.style.border = "1px solid black";
-    this.bomb.style.borderRadius = "50%";
-    this.bomb.style.position = "absolute";
+    this.bomb.setAttribute("class", "bomb");
+    this.bomb.style.backgroundColor = this.getBombColor();
     this.bomb.style.left = this.left + "px";
-    this.isDropping = false;
     parentElement.appendChild(this.bomb);
-    this.destruction = undefined;
-    this.dropping = undefined;
-    this.hitting = undefined;
+  }
+
+  getInitialSpeed(maxSpeed: number) {
+    return Math.ceil(Math.random() * maxSpeed);
+  }
+
+  getBombColor() {
+    return this.colors[Math.floor(Math.random() * this.colors.length)];
+  }
+
+  getInitialPosition() {
+    return Math.floor(Math.random() * this.parent.offsetWidth);
   }
 
   removeFromDom() {
     this.bomb.remove();
-    clearInterval(this.destruction);
-    clearInterval(this.dropping);
-    clearInterval(this.hitting);
+    this.clearAllIntervalHandles();
   }
 
   get coordinates() {
@@ -64,7 +70,7 @@ export class Bomb {
   }
 
   autoDestruction() {
-    this.destruction = setInterval(() => {
+    this.destructionIntervalHandle = setInterval(() => {
       if (this.isDropping) {
         const shouldExplode = Math.floor(Math.random() * 100) === 0;
         if (shouldExplode) {
@@ -75,14 +81,16 @@ export class Bomb {
         }
       }
     }, 1000);
+    this.intervalHandlesList.push(this.destructionIntervalHandle);
   }
 
   startDropping() {
     this.isDropping = true;
-    this.dropping = setInterval(() => {
+    this.droppingIntervalHandle = setInterval(() => {
       this.bomb.style.top = this.top + "px";
       this.top += this.speed;
     }, 500);
+    this.intervalHandlesList.push(this.droppingIntervalHandle);
   }
 
   isPadHit() {
@@ -97,10 +105,15 @@ export class Bomb {
   }
 
   hit() {
-    this.hitting = setInterval(() => {
+    this.hittingIntervalHandle = setInterval(() => {
       if (this.isPadHit()) {
         this.removeFromDom();
       }
     }, 100);
+    this.intervalHandlesList.push(this.hittingIntervalHandle);
+  }
+
+  private clearAllIntervalHandles() {
+    this.intervalHandlesList.forEach((interval) => clearInterval(interval));
   }
 }
