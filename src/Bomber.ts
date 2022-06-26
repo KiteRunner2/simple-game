@@ -12,13 +12,11 @@ export class Bomber {
   }
 
   releaseBomb() {
-    if (this.releasedBombCount < 10) {
-      const newBomb = new Bomb(this.canvas, this.pad);
-      this.releasedBombCount += 1;
-      newBomb.startDropping();
-      newBomb.autoDestruction();
-      newBomb.hit();
-    }
+    const newBomb = new Bomb(this.canvas, this.pad);
+    this.releasedBombCount += 1;
+    newBomb.startDropping();
+    newBomb.autoDestruction();
+    newBomb.hit();
   }
 
   startDroppingBombs() {
