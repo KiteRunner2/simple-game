@@ -4,10 +4,6 @@ const gameController = new Control();
 
 gameController.startGame();
 
-const test = document.getElementById("test-something")!;
-
-test.innerHTML = "TESTED";
-
 function handleKeyPress(e: KeyboardEvent) {
   const { key } = e;
   switch (key) {
