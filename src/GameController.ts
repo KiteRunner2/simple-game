@@ -9,9 +9,6 @@ class GameController {
     this.canvas = document.getElementById("canvas")!;
     this.pad = this.createPad();
     this.bomber = this.createBomber();
-    console.log("canvas", this.canvas);
-    console.log("pad", this.pad);
-    console.log("bomber", this.bomber);
   }
 
   startGame() {
