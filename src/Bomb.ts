@@ -1,6 +1,21 @@
-class Bomb {
-  constructor(parentElement) {
+import { Pad } from "./Pad";
+export class Bomb {
+  parent: HTMLElement;
+  bomb: HTMLElement;
+  pad: Pad;
+  colors: string[];
+  width: number;
+  height: number;
+  speed: number;
+  top: number;
+  left: number;
+  isDropping: boolean;
+  destruction: number | undefined;
+  dropping: number | undefined;
+  hitting: number | undefined;
+  constructor(parentElement: HTMLElement, pad: Pad) {
     this.parent = parentElement;
+    this.pad = pad;
     this.colors = [
       "red",
       "pink",
@@ -27,14 +42,25 @@ class Bomb {
     this.bomb.style.left = this.left + "px";
     this.isDropping = false;
     parentElement.appendChild(this.bomb);
-    this.destruction = null;
-    this.dropping = null;
+    this.destruction = undefined;
+    this.dropping = undefined;
+    this.hitting = undefined;
   }
 
   removeFromDom() {
     this.bomb.remove();
     clearInterval(this.destruction);
     clearInterval(this.dropping);
+    clearInterval(this.hitting);
+  }
+
+  get coordinates() {
+    return {
+      left: this.bomb.getClientRects()[0].left,
+      right: this.bomb.getClientRects()[0].right,
+      top: this.bomb.getClientRects()[0].top,
+      bottom: this.bomb.getClientRects()[0].bottom,
+    };
   }
 
   autoDestruction() {
@@ -45,7 +71,6 @@ class Bomb {
           this.removeFromDom();
         }
         if (this.top > this.parent.offsetHeight) {
-          console.log(this.top, this.parent.offsetHeight);
           this.removeFromDom();
         }
       }
@@ -58,5 +83,24 @@ class Bomb {
       this.bomb.style.top = this.top + "px";
       this.top += this.speed;
     }, 500);
+  }
+
+  isPadHit() {
+    if (
+      this.coordinates.top >= this.pad.coordinates.top &&
+      this.coordinates.left >= this.pad.coordinates.left &&
+      this.coordinates.right <= this.pad.coordinates.right
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  hit() {
+    this.hitting = setInterval(() => {
+      if (this.isPadHit()) {
+        this.removeFromDom();
+      }
+    }, 100);
   }
 }

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "build": "tsc --noEmit && esbuild --bundle src/index.ts --outfile=script.js"
+  },
+  "dependencies": {
+    "esbuild": "^0.14.47",
+    "typescript": "^4.7.4"
+  }
+}
