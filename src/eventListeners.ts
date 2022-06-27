@@ -1,5 +1,4 @@
 import { gameController } from "./GameController";
-import { BASE_URL, SERVER_TOKEN } from "../env";
 
 function handleKeyPress(e: KeyboardEvent) {
   const { key } = e;
@@ -26,7 +25,7 @@ function startGame() {
 }
 
 async function doCheck() {
-  const url = `${BASE_URL}user/przemek+prof@kritik.io/exist?token=${SERVER_TOKEN}`;
+  const url = `${process.env.BASE_URL}user/przemek+prof@kritik.io/exist?token=${process.env.SERVER_TOKEN}`;
   const response = await fetch(url);
   const data = await response.json();
   console.log(data);
