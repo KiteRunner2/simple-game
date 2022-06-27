@@ -30,6 +30,13 @@ class GameController {
     this.pad.moveRight();
   }
 
+  movePadUp() {
+    this.pad.moveUp();
+  }
+  movePadDown() {
+    this.pad.moveDown();
+  }
+
   createBomber() {
     return new Bomber(this.pad, this.canvas);
   }

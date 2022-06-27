@@ -55,6 +55,16 @@ export class Pad {
     this.right = this.right + this.speed;
   }
 
+  public moveUp() {
+    this.pad.style.bottom = this.bottom + 5 + "px";
+    this.bottom += 5;
+  }
+
+  public moveDown() {
+    this.pad.style.bottom = this.bottom - 5 + "px";
+    this.bottom -= 5;
+  }
+
   public increaseSpeed() {
     this.speed += 5;
     if (this.speed > 25) this.speed = 25;
