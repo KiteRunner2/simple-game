@@ -1,5 +1,5 @@
-import { Pad } from "./Pad";
-import { Bomber } from "./Bomber";
+import { Pad } from './Pad';
+import { Bomber } from './Bomber';
 export class Bomb {
   parent: HTMLElement;
   bomb: HTMLElement;
@@ -29,22 +29,13 @@ export class Bomb {
     this.top = 5;
     this.isExploaded = false;
     this.bomber = bomber;
-    this.colors = [
-      "red",
-      "pink",
-      "green",
-      "blue",
-      "black",
-      "brown",
-      "crimson",
-      "Coral",
-    ];
+    this.colors = ['red', 'pink', 'green', 'blue', 'black', 'brown', 'crimson', 'Coral'];
     this.droppingSpeed = this.getInitialSpeed(15);
     this.left = this.getInitialPosition();
-    this.bomb = document.createElement("div");
-    this.bomb.setAttribute("class", "bomb");
+    this.bomb = document.createElement('div');
+    this.bomb.setAttribute('class', 'bomb');
     this.bomb.style.backgroundColor = this.getBombColor();
-    this.bomb.style.left = this.left + "px";
+    this.bomb.style.left = this.left + 'px';
     parentElement.appendChild(this.bomb);
     this.startDropping();
   }
@@ -94,7 +85,7 @@ export class Bomb {
   private startDropping() {
     this.isDropping = true;
     this.droppingIntervalHandle = setInterval(() => {
-      this.bomb.style.top = this.top + "px";
+      this.bomb.style.top = this.top + 'px';
       this.top += this.droppingSpeed;
     }, 500);
     this.intervalHandlesList.push(this.droppingIntervalHandle);

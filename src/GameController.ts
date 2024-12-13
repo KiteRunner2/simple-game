@@ -1,12 +1,12 @@
-import { Bomber } from "./Bomber";
-import { Pad } from "./Pad";
+import { Bomber } from './Bomber';
+import { Pad } from './Pad';
 
 class GameController {
   canvas: HTMLElement;
   pad: Pad;
   bomber: Bomber;
   constructor() {
-    this.canvas = document.getElementById("canvas")!;
+    this.canvas = document.getElementById('canvas')!;
     this.pad = this.createPad();
     this.bomber = this.createBomber();
     this.updateHitCount();
@@ -55,17 +55,13 @@ class GameController {
 
   updateHitCount() {
     setInterval(() => {
-      document.getElementById(
-        "hit-count"
-      )!.innerText = `HITS: ${this.hitCount}`;
+      document.getElementById('hit-count')!.innerText = `HITS: ${this.hitCount}`;
     }, 100);
   }
 
   updateMissCount() {
     setInterval(() => {
-      document.getElementById(
-        "miss-count"
-      )!.innerText = `MISS: ${this.missCount}`;
+      document.getElementById('miss-count')!.innerText = `MISS: ${this.missCount}`;
     }, 100);
   }
 }

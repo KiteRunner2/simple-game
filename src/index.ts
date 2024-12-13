@@ -1,4 +1,4 @@
-import { initDocumentListeners, initElementListeners } from "./eventListeners";
+import { initDocumentListeners, initElementListeners } from './eventListeners';
 
 initDocumentListeners();
 initElementListeners();

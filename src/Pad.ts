@@ -11,16 +11,16 @@ export class Pad {
     this.width = 200;
     this.height = 20;
     this.speed = 7;
-    this.pad = document.createElement("div");
-    this.pad.style.width = this.width + "px";
-    this.pad.style.height = this.height + "px";
-    this.pad.style.border = "1px solid black";
-    this.pad.style.backgroundColor = "yellow";
-    this.pad.style.position = "absolute";
+    this.pad = document.createElement('div');
+    this.pad.style.width = this.width + 'px';
+    this.pad.style.height = this.height + 'px';
+    this.pad.style.border = '1px solid black';
+    this.pad.style.backgroundColor = 'yellow';
+    this.pad.style.position = 'absolute';
     this.right = 5;
     this.bottom = 10;
-    this.pad.style.bottom = this.bottom + "px";
-    this.pad.style.right = this.right + "px";
+    this.pad.style.bottom = this.bottom + 'px';
+    this.pad.style.right = this.right + 'px';
     parentElement.appendChild(this.pad);
   }
 
@@ -34,34 +34,24 @@ export class Pad {
   }
 
   public moveRight() {
-    if (
-      this.pad.getBoundingClientRect().right -
-        this.parentElement.getBoundingClientRect().right >
-      1
-    )
-      return;
-    this.pad.style.right = this.right - this.speed + "px";
+    if (this.pad.getBoundingClientRect().right - this.parentElement.getBoundingClientRect().right > 1) return;
+    this.pad.style.right = this.right - this.speed + 'px';
     this.right = this.right - this.speed;
   }
 
   public moveLeft() {
-    if (
-      this.pad.getBoundingClientRect().left -
-        this.parentElement.getBoundingClientRect().left <
-      1
-    )
-      return;
-    this.pad.style.right = this.right + this.speed + "px";
+    if (this.pad.getBoundingClientRect().left - this.parentElement.getBoundingClientRect().left < 1) return;
+    this.pad.style.right = this.right + this.speed + 'px';
     this.right = this.right + this.speed;
   }
 
   public moveUp() {
-    this.pad.style.bottom = this.bottom + 5 + "px";
+    this.pad.style.bottom = this.bottom + 5 + 'px';
     this.bottom += 5;
   }
 
   public moveDown() {
-    this.pad.style.bottom = this.bottom - 5 + "px";
+    this.pad.style.bottom = this.bottom - 5 + 'px';
     this.bottom -= 5;
   }
 

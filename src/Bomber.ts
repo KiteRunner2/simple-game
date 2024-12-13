@@ -1,5 +1,5 @@
-import { Bomb } from "./Bomb.js";
-import { Pad } from "./Pad.js";
+import { Bomb } from './Bomb.js';
+import { Pad } from './Pad.js';
 
 export class Bomber {
   pad: Pad;
