@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "ts-check": "tsc --noEmit",
+    "ts-check": "tsc",
     "build": "esbuild --bundle src/index.ts --outfile=compiled/script.js --minify",
     "deploy": "tsc --noEmit && esbuild --bundle src/index.ts --outfile=compiled/script.js --minify"
   },
