@@ -10,7 +10,7 @@ export class Pad {
     this.parentElement = parentElement;
     this.width = 200;
     this.height = 20;
-    this.speed = 5;
+    this.speed = 7;
     this.pad = document.createElement("div");
     this.pad.style.width = this.width + "px";
     this.pad.style.height = this.height + "px";
