@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="bombGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff5757" />
+      <stop offset="100%" stop-color="#5ce1e6" />
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" rx="12" fill="#1a1a1a" />
+  <circle cx="32" cy="24" r="12" fill="url(#bombGradient)" filter="url(#glow)" />
+  <rect x="12" y="46" width="40" height="8" rx="4" fill="#f0c808" filter="url(#glow)" />
+</svg>

@@ -1,0 +1,14 @@
+{
+  "name": "Bomb Catcher",
+  "short_name": "Bomb Catcher",
+  "icons": [
+    {
+      "src": "/favicon/favicon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    }
+  ],
+  "theme_color": "#121212",
+  "background_color": "#121212",
+  "display": "standalone"
+}
