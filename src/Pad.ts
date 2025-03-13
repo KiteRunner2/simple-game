@@ -14,9 +14,11 @@ export class Pad {
     this.pad = document.createElement('div');
     this.pad.style.width = this.width + 'px';
     this.pad.style.height = this.height + 'px';
-    this.pad.style.border = '1px solid black';
-    this.pad.style.backgroundColor = 'yellow';
+    this.pad.style.border = 'none';
+    this.pad.style.backgroundColor = '#f0c808';
+    this.pad.style.borderRadius = '4px';
     this.pad.style.position = 'absolute';
+    this.pad.style.boxShadow = '0 0 15px rgba(240, 200, 8, 0.6)';
     this.right = 5;
     this.bottom = 10;
     this.pad.style.bottom = this.bottom + 'px';

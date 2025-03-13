@@ -29,7 +29,7 @@ export class Bomb {
     this.top = 5;
     this.isExploaded = false;
     this.bomber = bomber;
-    this.colors = ['red', 'pink', 'green', 'blue', 'black', 'brown', 'crimson', 'Coral'];
+    this.colors = ['#ff5757', '#5ce1e6', '#c957ff', '#8eff70', '#ffde59', '#ff914d', '#5271ff', '#ff66c4'];
     this.droppingSpeed = this.getInitialSpeed(15);
     this.left = this.getInitialPosition();
     this.bomb = document.createElement('div');

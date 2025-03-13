@@ -1,20 +1,125 @@
-.canvas {
-  width: 60%;
-  height: 50vh;
-  border: 1px solid black;
-  margin: auto;
-  margin-top: 5vh;
-  position: relative;
-}
-
 body {
   padding: 0;
   margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #121212;
+  background-image: radial-gradient(circle at 50% 50%, #232323 0%, #121212 100%);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(45deg, #30cfff, #5ce1e6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 4px rgba(48, 207, 255, 0.5));
+}
+
+.instructions {
+  color: #ccc;
+  max-width: 600px;
+  margin: 0 auto 20px auto;
+  line-height: 1.5;
+  font-size: 0.9rem;
+}
+
+.canvas {
+  width: 60%;
+  height: 55vh;
+  border: 2px solid #30cfff;
+  border-radius: 8px;
+  margin: auto;
+  margin-top: 3vh;
+  position: relative;
+  background-color: #1a1a1a;
+  box-shadow: 0 0 20px rgba(48, 207, 255, 0.3);
+  overflow: hidden;
 }
 
 .bomb {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   position: absolute;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  transition: box-shadow 0.2s ease;
+}
+
+.game-container {
+  width: 80%;
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.controls {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.start-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.start-button:hover {
+  background-color: #3e8e41;
+  transform: scale(1.05);
+}
+
+.score-board {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  font-size: 1.2rem;
+  padding: 10px 20px;
+  background-color: #333;
+  border-radius: 6px;
+  min-width: 200px;
+}
+
+.score-item {
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+.hits {
+  color: #4CAF50;
+}
+
+.misses {
+  color: #f44336;
+}
+
+@media (max-width: 768px) {
+  .canvas {
+    width: 90%;
+    height: 40vh;
+  }
 }
