@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -13,27 +13,24 @@
     <div class="game-container">
       <header>
         <h1>Bomb Catcher</h1>
-        <p class="instructions">Use the left and right arrow keys to move the pad and catch falling bombs. Use up and down arrow keys to adjust speed.</p>
+        <p class="instructions">
+          Use the left and right arrow keys to move the pad and catch falling bombs. Use up and down arrow keys to
+          adjust speed.
+        </p>
       </header>
-      
+
       <div id="canvas" class="canvas"></div>
-      
+
       <div class="controls">
-        <button id="start-game-button" class="start-button">
-          <i class="fas fa-play"></i> Start Game
-        </button>
+        <button id="start-game-button" class="start-button"><i class="fas fa-play"></i> Start Game</button>
       </div>
-      
+
       <div class="score-board">
-        <div class="score-item hits">
-          <i class="fas fa-check-circle"></i> Hits: <span id="hit-count">0</span>
-        </div>
-        <div class="score-item misses">
-          <i class="fas fa-times-circle"></i> Misses: <span id="miss-count">0</span>
-        </div>
+        <div class="score-item hits"><i class="fas fa-check-circle"></i> <span id="hit-count">0</span></div>
+        <div class="score-item misses"><i class="fas fa-times-circle"></i> <span id="miss-count">0</span></div>
       </div>
     </div>
-    
+
     <script src="compiled/script.js" async defer></script>
   </body>
 </html>
