@@ -16,6 +16,7 @@ export class Bomb {
   hittingIntervalHandle: number | undefined;
   maxBombSpeed: number;
   intervalHandlesList: number[];
+  isCaught: boolean; // Added to prevent multiple processing
 
   constructor(parentElement: HTMLElement, pad: Pad, bomber: Bomber) {
     this.parent = parentElement;
@@ -28,6 +29,7 @@ export class Bomb {
     this.hittingIntervalHandle = undefined;
     this.top = 5;
     this.isExploaded = false;
+    this.isCaught = false; // Initialize isCaught
     this.bomber = bomber;
     this.colors = ['#ff5757', '#5ce1e6', '#c957ff', '#8eff70', '#ffde59', '#ff914d', '#5271ff', '#ff66c4'];
     this.droppingSpeed = this.getInitialSpeed(15);
@@ -52,9 +54,22 @@ export class Bomb {
     return Math.floor(Math.random() * this.parent.offsetWidth);
   }
 
-  removeFromDom() {
+  private animateCatchAndRemove() {
+    this.isCaught = true;
+    this.clearAllIntervalHandles(); // Stop movement and other checks
+    this.bomb.classList.add('bomb-caught'); // Add CSS class for animation
+
+    // Remove the bomb after the animation duration (e.g., 300ms)
+    setTimeout(() => {
+      this.removeFromDom(false); // Pass false to skip clearing intervals again
+    }, 300);
+  }
+
+  removeFromDom(clearHandles: boolean = true) {
     this.bomb.remove();
-    this.clearAllIntervalHandles();
+    if (clearHandles) {
+      this.clearAllIntervalHandles();
+    }
   }
 
   public get coordinates() {
@@ -111,14 +126,17 @@ export class Bomb {
 
   private enableHitDetector() {
     this.hittingIntervalHandle = setInterval(() => {
+      if (this.isCaught) return; // Already caught, do nothing
+
       if (this.isPadHit()) {
-        this.bomber.increaseMissCount();
-        this.removeFromDom();
+        this.bomber.increaseHitCount(); // Correctly count as a hit
+        this.animateCatchAndRemove();
       } else if (this.isTargetHit() && !this.isExploaded) {
-        this.isExploaded = true;
-        this.bomber.increaseHitCount();
+        this.isExploaded = true; // Mark as exploded (missed)
+        this.bomber.increaseMissCount(); // Correctly count as a miss
+        this.removeFromDom();
       }
-    }, 100);
+    }, 50); // Check more frequently for smoother hit detection
     this.intervalHandlesList.push(this.hittingIntervalHandle);
   }
 
