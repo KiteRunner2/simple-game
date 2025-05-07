@@ -2,6 +2,7 @@ import { Bomber } from './Bomber';
 import { Pad } from './Pad';
 import { Bullet } from './Bullet';
 import { Bomb } from './Bomb';
+import { keyStates } from './eventListeners'; // Added import
 
 class GameController {
   canvas: HTMLElement;
@@ -77,8 +78,18 @@ class GameController {
 
   startGameLoop() {
     setInterval(() => {
+      this.handlePadMovement(); // Added call
       this.checkCollisions();
     }, 50); // Check for collisions frequently
+  }
+
+  handlePadMovement() { // Added method
+    if (keyStates.ArrowLeft) {
+      this.pad.moveLeft();
+    }
+    if (keyStates.ArrowRight) {
+      this.pad.moveRight();
+    }
   }
 
   checkCollisions() {
