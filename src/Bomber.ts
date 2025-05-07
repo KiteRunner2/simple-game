@@ -9,7 +9,7 @@ export class Bomber {
   private bombHitCount: number;
   private bombMissCount: number;
   autoDestroyCount: number;
-  private bombsInAirList: Bomb[];
+  public activeBombs: Bomb[];
   constructor(myPad: Pad, canvas: HTMLElement) {
     this.pad = myPad;
     this.canvas = canvas;
@@ -18,11 +18,12 @@ export class Bomber {
     this.bombHitCount = 0;
     this.bombMissCount = 0;
     this.autoDestroyCount = 0;
-    this.bombsInAirList = [];
+    this.activeBombs = [];
   }
 
   private releaseBomb() {
-    this.bombsInAirList.push(new Bomb(this.canvas, this.pad, this));
+    const newBomb = new Bomb(this.canvas, this.pad, this);
+    this.activeBombs.push(newBomb);
     this.releasedBombCount += 1;
   }
 
@@ -44,8 +45,8 @@ export class Bomber {
     }, this.releaseInterval);
   }
 
-  public get bombsInAir() {
-    return this.bombsInAirList;
+  public get bombs() {
+    return this.activeBombs;
   }
 
   public get hitCount() {

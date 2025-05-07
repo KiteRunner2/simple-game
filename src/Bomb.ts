@@ -10,7 +10,7 @@ export class Bomb {
   top: number;
   left: number;
   isDropping: boolean;
-  isExploaded: boolean;
+  isExploded: boolean; // Corrected typo: isExploaded -> isExploded
   destructionIntervalHandle: number | undefined;
   droppingIntervalHandle: number | undefined;
   hittingIntervalHandle: number | undefined;
@@ -28,7 +28,7 @@ export class Bomb {
     this.droppingIntervalHandle = undefined;
     this.hittingIntervalHandle = undefined;
     this.top = 5;
-    this.isExploaded = false;
+    this.isExploded = false; // Corrected typo and ensure it's initialized
     this.isCaught = false; // Initialize isCaught
     this.bomber = bomber;
     this.colors = ['#ff5757', '#5ce1e6', '#c957ff', '#8eff70', '#ffde59', '#ff914d', '#5271ff', '#ff66c4'];
@@ -40,6 +40,17 @@ export class Bomb {
     this.bomb.style.left = this.left + 'px';
     parentElement.appendChild(this.bomb);
     this.startDropping();
+  }
+
+  public explode() {
+    this.isExploded = true; // Corrected typo
+    this.clearAllIntervalHandles();
+    this.bomb.classList.add('bomb-exploding'); // Add CSS class for explosion animation
+
+    // Remove the bomb after the animation duration (e.g., 500ms)
+    setTimeout(() => {
+      this.removeFromDom(false);
+    }, 500);
   }
 
   private getInitialSpeed(maxSpeed: number) {
@@ -73,11 +84,20 @@ export class Bomb {
   }
 
   public get coordinates() {
+    if (!this.bomb || !this.bomb.isConnected) {
+      return { left: -Infinity, right: -Infinity, top: -Infinity, bottom: -Infinity };
+    }
+    const rects = this.bomb.getClientRects();
+    // Add extra checks for rects and rects[0]
+    if (!rects || rects.length === 0 || !rects[0]) {
+      return { left: -Infinity, right: -Infinity, top: -Infinity, bottom: -Infinity };
+    }
+    const rect = rects[0]; // rects[0] should be valid here
     return {
-      left: this.bomb.getClientRects()[0].left,
-      right: this.bomb.getClientRects()[0].right,
-      top: this.bomb.getClientRects()[0].top,
-      bottom: this.bomb.getClientRects()[0].bottom,
+      left: rect.left,
+      right: rect.right,
+      top: rect.top,
+      bottom: rect.bottom,
     };
   }
 
@@ -131,8 +151,8 @@ export class Bomb {
       if (this.isPadHit()) {
         this.bomber.increaseHitCount(); // Correctly count as a hit
         this.animateCatchAndRemove();
-      } else if (this.isTargetHit() && !this.isExploaded) {
-        this.isExploaded = true; // Mark as exploded (missed)
+      } else if (this.isTargetHit() && !this.isExploded) { // Corrected typo
+        this.isExploded = true; // Mark as exploded (missed)
         this.bomber.increaseMissCount(); // Correctly count as a miss
         this.removeFromDom();
       }

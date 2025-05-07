@@ -11,6 +11,9 @@ function handleKeyPress(e: KeyboardEvent) {
       return gameController.increasePadSpeed();
     case 'ArrowDown':
       return gameController.decreasePadSpeed();
+    case ' ': // Space bar
+      e.preventDefault(); // Prevent default space bar action (e.g., scrolling)
+      return gameController.shoot();
     default:
       return;
   }

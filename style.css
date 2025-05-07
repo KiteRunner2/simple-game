@@ -58,11 +58,37 @@ h1 {
   transition: box-shadow 0.2s ease, transform 0.3s ease-out, opacity 0.3s ease-out;
 }
 
-/* New class for bomb catch animation */
 .bomb-caught {
   transform: scale(1.5);
   opacity: 0;
   box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+  animation: catchAnimation 0.3s ease-out forwards;
+}
+
+.bullet {
+  position: absolute;
+  width: 5px;
+  height: 15px;
+  background-color: white;
+  border-radius: 2.5px;
+}
+
+.bomb-exploding {
+  animation: explosionAnimation 0.5s ease-out forwards;
+  background-color: orange !important; /* Make explosion prominent */
+  border-radius: 50% !important;
+  transform-origin: center;
+}
+
+@keyframes explosionAnimation {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
 }
 
 .game-container {
